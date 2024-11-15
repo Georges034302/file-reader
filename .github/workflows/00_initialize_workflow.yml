@@ -1,0 +1,19 @@
+name: Initialize Git Configuration
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup-git:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Git user for commits
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
