@@ -1,13 +1,9 @@
 name: Step 2 - Upload Python Word Count Script
 
 on:
-  workflow_run:
-    workflows: ["Initialize Repository and Set up Git Configuration"]
-    types:
-      - completed
   push:
     paths:
-      - "reader.py"  # Trigger this workflow when reader.py is pushed to the repository
+      - "reader.py" # Trigger this workflow when reader.py is uploaded or updated
 
 jobs:
   update-readme:
@@ -15,11 +11,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4  # Ensure the latest version of checkout is used
+        uses: actions/checkout@v4
 
       - name: Set up Git configuration for commit
         run: |
-          # Set commit information directly for this step without global gitconfig
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
