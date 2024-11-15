@@ -15,12 +15,6 @@ jobs:
       - name: List files in the repository for debugging
         run: ls -al
 
-      - name: Set up Git user for commits
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global --add safe.directory /github/workspace
-
       - name: Update README for Next Step
         run: |
           echo "## Step 3 Complete" >> README.md

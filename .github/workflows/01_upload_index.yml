@@ -14,13 +14,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Git user for commits
-        run: |
-          # Set up Git configuration with GitHub actor info
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global --add safe.directory /github/workspace
-
       - name: Update README for Next Step
         run: |
           # Update README.md with instructions for the next step
@@ -32,10 +25,3 @@ jobs:
           # Stage and commit the updated README.md file
           git add README.md
           git commit -m "Update README with Step 2 instructions"
-
-      - name: Push changes to repository
-        run: |
-          # Push the changes back to the repository using the GITHUB_TOKEN
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
