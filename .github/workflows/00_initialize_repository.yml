@@ -1,33 +1,45 @@
-# .github/workflows/00_initialize_repository.yml
 name: Initialize Repository and Set up Git Configuration
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger this workflow only when a push to the main branch occurs
   pull_request:
     branches:
-      - main
+      - main  # Trigger this workflow for pull requests targeting main
 
 jobs:
   initialize-repository:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up Git user for commits
+        uses: actions/checkout@v4
+        
+      - name: Set up Git configuration for commit
         run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-          git config --global --add safe.directory /github/workspace
-          # Save valid Git configuration (exclude git-lfs settings)
-          git config --list | grep -vE 'filter.lfs.clean|filter.lfs.smudge' > .github/gitconfig.txt
-
-      - name: Commit Git configuration file
+          # Set commit information directly for this step without global gitconfig
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+        
+      - name: Create and switch to a new branch
         run: |
-          git add .github/gitconfig.txt
-          git commit -m "Save Git configuration"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH=initialize-repository-branch
+          git checkout -b $BRANCH
+
+      - name: Modify files (e.g., README.md or others)
+        run: |
+          # Example modification (customize as needed)
+          echo "This is a new repository initialized by GitHub Actions" >> README.md
+
+      - name: Commit changes
+        run: |
+          git add README.md
+          git commit -m "Initialize repository with basic setup"
+        
+      - name: Push changes to the repository
+        run: |
+          git push --set-upstream origin $BRANCH
+        
+      - name: Restore main branch
+        run: |
+          git checkout main
