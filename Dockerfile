@@ -1,4 +1,4 @@
-# Dockerfile
+# Dockerfile installs latest ubuntu
 FROM ubuntu:latest
 
 # Install Python
