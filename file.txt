@@ -1,4 +1,3 @@
 This is a test file
 reader will read and count the words in this file
 count will be updated into index.html
-the reader always detects changes
