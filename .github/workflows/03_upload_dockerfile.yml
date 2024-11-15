@@ -3,14 +3,19 @@ name: Step 3 - Upload Dockerfile
 on:
   push:
     paths:
-      - "Dockerfile"
+      - "Dockerfile" # Trigger this workflow when Dockerfile is pushed to the repository
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Configure Git for committing
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: List files in the repository for debugging
         run: ls -al
