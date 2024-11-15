@@ -26,6 +26,10 @@ jobs:
         run: |
           cat index.html  # Print the contents of index.html for debugging
 
+      - name: Pull the latest changes from remote main branch before pushing
+        run: |
+          git pull origin main --rebase
+
       - name: Commit changes to index.html if word count was added
         run: |
           git config user.name "github-actions[bot]"
