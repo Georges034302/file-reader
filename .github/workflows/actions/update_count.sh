@@ -1,19 +1,22 @@
 #!/bin/bash
 
-# Path to the input file (file.txt)
-INPUT_FILE="file.txt"
+# Calculate word count of file.txt
+WORD_COUNT=$(wc -w < file.txt)
 
-# Word count logic (using wc -w)
-WORD_COUNT=$(wc -w < "$INPUT_FILE")
+# Read current content of index.html
+HTML_CONTENT=$(cat index.html)
 
-# Path to index.html
-INDEX_FILE="index.html"
+# Update the word count in the HTML
+UPDATED_CONTENT="<p>The word count of file is: $WORD_COUNT</p>"
 
-# Check if index.html exists
-if [ -f "$INDEX_FILE" ]; then
-    # Ensure the word count is inserted in the right location (the <p> tag)
-    sed -i "s|<p>The word count of file is: |<p>The word count of file is: $WORD_COUNT|" "$INDEX_FILE"
-    echo "Word count updated in index.html"
+# Replace the existing word count line or append if not found
+if grep -q 'The word count of file is:' index.html; then
+  sed -i "s|<p>The word count of file is: .*</p>|$UPDATED_CONTENT|" index.html
 else
-    echo "Error: $INDEX_FILE not found."
+  echo "$UPDATED_CONTENT" >> index.html
 fi
+
+# Staging and committing changes
+git add index.html
+git commit -m "Update word count in index.html"
+git push origin main
