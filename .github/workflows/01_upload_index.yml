@@ -16,7 +16,7 @@ jobs:
 
       - name: Set up Git user for commits
         run: |
-          # Make sure both user.name and user.email are correctly set up for GitHub Actions
+          # Set up Git configuration with GitHub actor info
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
@@ -29,7 +29,7 @@ jobs:
           echo "### Next Step: Push Python Word Count Script" >> README.md
           echo "Add a Python script named reader.py that reads file.txt and outputs the word count." >> README.md
           
-          # Commit the changes to README.md
+          # Stage and commit the updated README.md file
           git add README.md
           git commit -m "Update README with Step 2 instructions"
 
@@ -37,3 +37,5 @@ jobs:
         run: |
           # Push the changes back to the repository using the GITHUB_TOKEN
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
