@@ -1,13 +1,13 @@
 name: Step 1 - Upload index.html
 
 on:
-  push:
-    paths:
-      - "index.html"  # Trigger this workflow when index.html is pushed to the repository
   workflow_run:
     workflows: ["Initialize Repository and Set up Git Configuration"]
     types:
-      - completed  # Trigger this workflow when the "Initialize Repository" workflow is completed
+      - completed
+  push:
+    paths:
+      - "index.html"  # Trigger this workflow when index.html is pushed to the repository
 
 jobs:
   update-readme:
@@ -28,3 +28,19 @@ jobs:
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if README.md has changed
+        run: |
+          git diff --exit-code README.md || echo "Changes detected in README.md"
+
+      - name: Commit changes if README.md has been updated
+        run: |
+          # Check if there are any changes to commit
+          if git diff --exit-code README.md; then
+            echo "No changes to README.md. Skipping commit."
+          else
+            echo "Changes detected in README.md. Committing..."
+            git add README.md
+            git commit -m "Update README after adding index.html"
+            git push origin main
+          fi
