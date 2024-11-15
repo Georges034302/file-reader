@@ -31,10 +31,9 @@ jobs:
           # Extract the word count from word_count.txt and update index.html
           WORD_COUNT=$(python3 reader.py)
           echo "Updating index.html with new word count: $WORD_COUNT"
-          
-          # Replace the word count placeholder in index.html
-          sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|" index.html
-          
+          # Use a safer delimiter in sed and ensure the replacement expression is correct
+          sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|g" index.html
+
           # Stage and commit the updated index.html
           git add index.html
           git commit -m "Update index.html with new word count"
