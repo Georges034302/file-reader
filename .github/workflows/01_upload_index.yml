@@ -22,9 +22,9 @@ jobs:
         run: |
           # Load the Git configuration file
           if [ -f .github/gitconfig.txt ]; then
-            cat .github/gitconfig.txt | while read line; do
-              git config --global $line
-            done
+            while IFS= read -r line; do
+              git config --global "$line"
+            done < .github/gitconfig.txt
           fi
 
       - name: Run update_readme.sh script with 01_step.txt

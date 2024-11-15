@@ -21,9 +21,9 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
-          # Save Git configuration to a file in the repo to persist for future workflows
-          git config --list > .github/gitconfig.txt
-          
+          # Save valid Git configuration (exclude invalid ones like safe.directory)
+          git config --list | grep -v 'safe.directory' > .github/gitconfig.txt
+
       - name: Commit Git configuration file
         run: |
           git add .github/gitconfig.txt
