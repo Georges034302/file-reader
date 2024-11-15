@@ -1,4 +1,4 @@
-# reads and counts the words in file.txt
+# reads and counts the words in file
 def count_words_in_file():
     # Read file.txt and count words
     try:
