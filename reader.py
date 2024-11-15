@@ -1,4 +1,4 @@
-# reader.py reads file.txt and count the words
+# reads file.txt and count the words
 def update_index_with_word_count():
     # Read file.txt and count words
     try:
