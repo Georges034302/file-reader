@@ -33,7 +33,7 @@ jobs:
           echo "Updating index.html with new word count: $WORD_COUNT"
           
           # Replace the word count placeholder in index.html
-          sed -i "s/<!-- Word Count -->/Word Count: $WORD_COUNT/" index.html
+          sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|" index.html
           
           # Stage and commit the updated index.html
           git add index.html
