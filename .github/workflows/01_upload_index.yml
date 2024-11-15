@@ -4,10 +4,10 @@ on:
   workflow_run:
     workflows: ["Initialize Repository and Set up Git Configuration"]
     types:
-      - completed
+      - completed  # This ensures Step 1 runs only after the initial setup is completed
   push:
     paths:
-      - "index.html"  # Trigger this workflow only when index.html is pushed to the repository
+      - "index.html"  # Only trigger when index.html is pushed (first-time or updates to index.html)
 
 jobs:
   update-readme:
@@ -30,7 +30,6 @@ jobs:
 
       - name: Commit updated README.md and push changes if modified
         run: |
-          # Check if README.md has changes
           git diff --exit-code README.md || (
             git add README.md && 
             git commit -m "Update README after adding index.html" && 
