@@ -10,17 +10,27 @@ fi
 
 # Check if the provided file exists
 if [ -f "$STEP_FILE" ]; then
-    # Append content from the step.txt file to README.md
-    cat "$STEP_FILE" >> README.md
-    echo "Content from $STEP_FILE appended to README.md"
+    # Read the content of the step.txt file
+    STEP_CONTENT=$(cat "$STEP_FILE")
+    
+    # Check if the content already exists in README.md
+    if grep -q "$STEP_CONTENT" README.md; then
+        echo "Content from $STEP_FILE already exists in README.md. Skipping append."
+    else
+        # Append content from the step.txt file to README.md
+        echo "$STEP_CONTENT" >> README.md
+        echo "Content from $STEP_FILE appended to README.md"
+    fi
 else
-    echo "Error: $STEP_FILE not found!" >> README.md
-    echo "$STEP_FILE not found!" 
+    echo "Error: $STEP_FILE not found!" 
+    exit 1
 fi
 
-# Stage and commit the changes to README.md
-git add README.md
-git commit -m "Update README with instructions"
-
-# Push changes back to the repository
-git push origin main
+# Stage and commit the changes to README.md if there were any modifications
+if git diff --quiet; then
+    echo "No changes to commit."
+else
+    git add README.md
+    git commit -m "Update README with instructions"
+    git push origin main
+fi
