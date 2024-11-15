@@ -15,7 +15,7 @@ jobs:
       - name: Update README for Next Step
         run: |
           # Load content from the txt file and append to README.md
-          cat ./github/workflows/steps/02_step.txt >> README.md
+          cat ./.github/workflows/steps/02_step.txt >> README.md
           # Stage and commit the updated README.md file
           git add README.md
           git commit -m "Update README with Step 2 instructions"

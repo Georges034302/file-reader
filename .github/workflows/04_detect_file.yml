@@ -19,5 +19,5 @@ jobs:
 
       - name: Run the update word count script
         run: |
-          chmod +x ./github/workflows/actions/update_count.sh
-          ./github/workflows/actions/update_count.sh
+          chmod +x ./.github/workflows/actions/update_count.sh
+          ./.github/workflows/actions/update_count.sh
