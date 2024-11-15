@@ -29,11 +29,11 @@ jobs:
           python reader.py file.txt > word_count.txt
 
           # Extract the word count from word_count.txt and update index.html
-          WORD_COUNT=$(cat word_count.txt)
+          WORD_COUNT=$(python3 reader.py)
           echo "Updating index.html with new word count: $WORD_COUNT"
           
           # Replace the word count placeholder in index.html
-          sed -i "s/Word Count: [0-9]*/Word Count: $WORD_COUNT/" index.html
+          sed -i "s/<!-- Word Count -->/Word Count: $WORD_COUNT/" index.html
           
           # Stage and commit the updated index.html
           git add index.html
