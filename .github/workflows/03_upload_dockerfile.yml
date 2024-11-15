@@ -1,4 +1,3 @@
-# .github/workflows/03_upload_dockerfile.yml
 name: Step 3 - Upload Dockerfile
 
 on:
@@ -13,12 +12,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: List files in the repository for debugging
+        run: ls -al
+
+      - name: Set up Git user for commits
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global --add safe.directory /github/workspace
+
       - name: Update README for Next Step
         run: |
           echo "## Step 3 Complete" >> README.md
           echo "Nice work! You uploaded Dockerfile." >> README.md
           echo "### Final Step: Deploy" >> README.md
           echo "Deploy the application by configuring the desired deployment setup." >> README.md
+
+          # Stage and commit the updated README.md file
           git add README.md
           git commit -m "Update README with deployment instructions"
           git push origin main
