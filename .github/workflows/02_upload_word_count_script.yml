@@ -1,13 +1,14 @@
-name: Step 2 - Upload Python Word Count Script
+name: Step 2 - Upload Dockerfile
 
 on:
   push:
     paths:
-      - "reader.py"  # Trigger only if reader.py is updated
+      - "Dockerfile"  # Trigger only if Dockerfile changes
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,17 +18,23 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: List files in the repository for debugging
-        run: ls -al
-
       - name: Run update_readme.sh script with 02_step.txt
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/02_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check if README.md was updated
+        run: |
+          # Check if README.md was modified
+          git diff --exit-code README.md || echo "README.md has changes"
+
       - name: Commit updated README.md and push changes
         run: |
-          git add README.md
-          git commit -m "Update README after adding reader.py"
-          git push origin main
+          if git diff --quiet README.md; then
+            echo "No changes in README.md. Skipping commit."
+          else
+            git add README.md
+            git commit -m "Update README after adding reader.py"
+            git push origin main
+          fi

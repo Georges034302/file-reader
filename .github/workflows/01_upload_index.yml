@@ -1,13 +1,9 @@
-name: Step 1 - Upload index.html
+name: Step 2 - Upload reader.py
 
 on:
-  workflow_run:
-    workflows: ["Initialize Repository and Set up Git Configuration"]  # Only run if initialization completes
-    types:
-      - completed
   push:
     paths:
-      - "index.html"  # Trigger only if `index.html` is pushed to the repository
+      - "reader.py"  # Only trigger on reader.py changes
 
 jobs:
   update-readme:
@@ -22,23 +18,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run update_readme.sh script with 01_step.txt
+      - name: Run update_readme.sh script with 02_step.txt
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
+          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/02_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check if README.md has changes
-        run: |
-          git diff --exit-code README.md || echo "Changes detected in README.md"
-
-      - name: Commit changes if README.md is modified
-        run: |
-          if ! git diff --quiet README.md; then
-            echo "Changes detected in README.md. Committing..."
-            git add README.md
-            git commit -m "Update README after adding index.html"
-            git push origin main
-          else
-            echo "No changes to README.md. Skipping commit."
-          fi
