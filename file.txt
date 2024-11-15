@@ -1,3 +1,0 @@
-This is a text file
-reader.py will read the file and count the words
-reader will write the new count to index.html
