@@ -1,15 +1,19 @@
 #!/bin/bash
 
-# Run the reader.py script to process file.txt and get the word count
-WORD_COUNT=$(python3 reader.py)
+# Path to the input file (file.txt)
+INPUT_FILE="file.txt"
 
-# Ensure that the word count is a valid number (only digits)
-if [[ "$WORD_COUNT" =~ ^[0-9]+$ ]]; then
-  echo "Current word count: $WORD_COUNT"
+# Word count logic (using wc -w)
+WORD_COUNT=$(wc -w < "$INPUT_FILE")
+
+# Path to index.html
+INDEX_FILE="index.html"
+
+# Check if index.html exists
+if [ -f "$INDEX_FILE" ]; then
+    # Ensure the word count is inserted in the right location (the <p> tag)
+    sed -i "s|<p>The word count of file is: |<p>The word count of file is: $WORD_COUNT|" "$INDEX_FILE"
+    echo "Word count updated in index.html"
 else
-  echo "Error: Word count is invalid. Exiting."
-  exit 1
+    echo "Error: $INDEX_FILE not found."
 fi
-
-# Replace the old word count in the <p> tag
-sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|g" index.html
