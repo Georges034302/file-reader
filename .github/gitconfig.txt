@@ -1,11 +1,9 @@
-safe.directory=*
 filter.lfs.clean=git-lfs clean -- %f
 filter.lfs.smudge=git-lfs smudge -- %f
 filter.lfs.process=git-lfs filter-process
 filter.lfs.required=true
 user.name=Georges034302
 user.email=Georges034302@users.noreply.github.com
-safe.directory=/github/workspace
 core.repositoryformatversion=0
 core.filemode=true
 core.bare=false
@@ -13,6 +11,6 @@ core.logallrefupdates=true
 remote.origin.url=https://github.com/Georges034302/file-reader
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 gc.auto=0
-http.https://github.com/.extraheader=AUTHORIZATION: basic eC1hY2Nlc3MtdG9rZW46Z2hzX2NCWWFYTjh5cjNpY0lxem5ORXpDbUNRT1k3VmtubDExbDUydQ==
+http.https://github.com/.extraheader=AUTHORIZATION: basic eC1hY2Nlc3MtdG9rZW46Z2hzX3g0TUJOQUdwNmdPd21tVGNzYVNoOGIyTHdwOTM5MjE3MUc3Zg==
 branch.main.remote=origin
 branch.main.merge=refs/heads/main
