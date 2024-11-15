@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "## Step 3 Complete" >> README.md
           echo "Nice work! You uploaded Dockerfile." >> README.md
-          echo "### Final Step: Deploy" >> README.md
+          echo "### Final Step: File Detector" >> README.md
           echo "Deploy the application by configuring the desired deployment setup." >> README.md
 
           # Stage and commit the updated README.md file
