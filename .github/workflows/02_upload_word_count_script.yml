@@ -13,13 +13,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Git user for commits
+        run: |
+          # Set up Git configuration with GitHub actor info
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global --add safe.directory /github/workspace
+
       - name: Update README for Next Step
         run: |
           echo "## Step 2 Complete" >> README.md
           echo "Well done! You added reader.py." >> README.md
           echo "### Next Step: Push Dockerfile" >> README.md
           echo "Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count." >> README.md
+
+          # Stage and commit the updated README.md file
           git add README.md
           git commit -m "Update README with Step 3 instructions"
-          git push origin main
-
