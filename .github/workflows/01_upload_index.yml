@@ -28,9 +28,3 @@ jobs:
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit and push updated index.html
-        run: |
-          git add index.html
-          git commit -m "Update index.html file"
-          git push origin main
