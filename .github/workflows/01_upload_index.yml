@@ -22,6 +22,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Check if README.md has already been updated
+        run: |
+          if ! git diff --exit-code README.md; then
+            echo "README.md already updated, skipping commit."
+            exit 0
+          fi
+
       - name: Run update_readme.sh script with 01_step.txt
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
@@ -30,8 +37,6 @@ jobs:
 
       - name: Commit updated README.md and push changes if modified
         run: |
-          git diff --exit-code README.md || (
-            git add README.md && 
-            git commit -m "Update README after adding index.html" && 
-            git push origin main
-          ) || echo "No changes to commit"
+          git add README.md
+          git commit -m "Update README after adding index.html" || echo "No changes to commit"
+          git push origin main || echo "No changes to commit"
