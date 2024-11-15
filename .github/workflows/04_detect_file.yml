@@ -1,59 +1,23 @@
-name: Step 4 - Detect file.txt Update and Re-run Script
+name: Detect File Changes and Update Word Count
 
 on:
   push:
     paths:
-      - "file.txt"  # Trigger when file.txt is updated
+      - "file.txt"
 
 jobs:
-  detect-and-update:
+  update-word-count:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Set up Python for word count script
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Adjust the version to match your script's requirements
+          python-version: '3.x'
 
-      - name: Install dependencies
+      - name: Run the update word count script
         run: |
-          # Install any dependencies required by reader.py (if any)
-          pip install -r requirements.txt || echo "No requirements.txt file found"
-
-      - name: Re-run reader.py and update index.html
-        run: |
-          # Run the reader.py script to process file.txt and get the word count
-          python reader.py file.txt > word_count.txt
-
-          # Get the word count from reader.py
-          WORD_COUNT=$(python3 reader.py)
-
-          # Ensure that the word count is a valid number (only digits)
-          if [[ "$WORD_COUNT" =~ ^[0-9]+$ ]]; then
-            echo "Current word count: $WORD_COUNT"
-          else
-            echo "Error: Word count is invalid. Exiting."
-            exit 1
-          fi
-
-          # Display current content of index.html before the update
-          echo "Current index.html content:"
-          cat index.html
-
-          # Use printf to safely format the word count and ensure correct escaping
-          echo "Updating index.html with new word count: $WORD_COUNT"
-          # Replace the old word count in the <p> tag
-          sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|g" index.html
-
-          # Display updated content
-          echo "Updated index.html content:"
-          cat index.html
-
-          # Stage and commit the updated index.html
-          git add index.html
-          git commit -m "Update index.html with new word count"
-          git push origin main
-          
+          chmod +x ./update_word_count.sh
+          ./update_word_count.sh
