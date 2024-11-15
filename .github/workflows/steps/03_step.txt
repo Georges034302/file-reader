@@ -1,0 +1,4 @@
+## Step 3 Complete
+Nice work! You uploaded Dockerfile.
+### Final Step: File Detector
+Deploy the application by configuring the desired deployment setup.

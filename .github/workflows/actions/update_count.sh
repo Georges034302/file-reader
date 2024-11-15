@@ -14,13 +14,9 @@ fi
 # Replace the old word count in the <p> tag
 sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|g" index.html
 
-# Update README with the step completion information
-echo "## Step 4 Complete" >> README.md
-echo "Nice work! You updated the word count in index.html." >> README.md
-echo "### Final Step: File Detector" >> README.md
-echo "Deploy the application by configuring the desired deployment setup." >> README.md
-
-# Stage and commit the updated index.html
-git add index.html
-git commit -m "Update index.html with new word count"
+# Load content from the txt file and append to README.md
+cat ./github/workflows/steps/04_step.txt >> README.md
+# Stage and commit the updated README.md file
+git add README.md
+git commit -m "Update README with Step 4 instructions"
 git push origin main

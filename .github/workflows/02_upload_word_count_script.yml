@@ -14,12 +14,9 @@ jobs:
 
       - name: Update README for Next Step
         run: |
-          echo "## Step 2 Complete" >> README.md
-          echo "Well done! You added reader.py." >> README.md
-          echo "### Next Step: Push Dockerfile" >> README.md
-          echo "Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count." >> README.md
-          
+          # Load content from the txt file and append to README.md
+          cat ./github/workflows/steps/02_step.txt >> README.md
           # Stage and commit the updated README.md file
           git add README.md
-          git commit -m "Update README with Step 3 instructions"
-          git push origin main  # Add this line to push the changes back
+          git commit -m "Update README with Step 2 instructions"
+          git push origin main
