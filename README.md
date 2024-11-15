@@ -11,3 +11,7 @@ Well done! You added reader.py.
 ### Next Step: Push Dockerfile
 Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count.
           
+## Step 3 Complete
+Nice work! You uploaded Dockerfile.
+### Final Step: File Detector
+Deploy the application by configuring the desired deployment setup.
