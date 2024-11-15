@@ -4,10 +4,10 @@ name: Initialize Repository and Set up Git Configuration
 on:
   push:
     branches:
-      - main  # Trigger this workflow only when a push to the main branch occurs
+      - main
   pull_request:
     branches:
-      - main  # Trigger this workflow for pull requests targeting main
+      - main
 
 jobs:
   initialize-repository:
@@ -21,9 +21,13 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
-
-      - name: Push changes to repository
+          # Save Git configuration to a file in the repo to persist for future workflows
+          git config --list > .github/gitconfig.txt
+          
+      - name: Commit Git configuration file
         run: |
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          git add .github/gitconfig.txt
+          git commit -m "Save Git configuration"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

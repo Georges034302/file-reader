@@ -3,12 +3,12 @@ name: Step 1 - Upload index.html
 
 on:
   workflow_run:
-    workflows: ["Initialize Repository and Set up Git Configuration"]  # Trigger this workflow after 00_initialize_repository.yml completes
+    workflows: ["Initialize Repository and Set up Git Configuration"]
     types:
       - completed
   push:
     paths:
-      - "index.html"  # Trigger this workflow when index.html is pushed to the repository
+      - "index.html"
 
 jobs:
   update-readme:
@@ -18,9 +18,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Load Git configuration from file
+        run: |
+          # Load the Git configuration file
+          if [ -f .github/gitconfig.txt ]; then
+            cat .github/gitconfig.txt | while read line; do
+              git config --global $line
+            done
+          fi
+
       - name: Run update_readme.sh script with 01_step.txt
         run: |
-          # Run the update_readme.sh script with the path to the step txt file
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
