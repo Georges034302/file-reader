@@ -1,0 +1,24 @@
+# .github/workflows/03_upload_dockerfile.yml
+name: Step 3 - Upload Dockerfile
+
+on:
+  push:
+    paths:
+      - "Dockerfile"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update README for Next Step
+        run: |
+          echo "## Step 3 Complete" >> README.md
+          echo "Nice work! You uploaded Dockerfile." >> README.md
+          echo "### Final Step: Deploy" >> README.md
+          echo "Deploy the application by configuring the desired deployment setup." >> README.md
+          git add README.md
+          git commit -m "Update README with deployment instructions"
+          git push origin main
