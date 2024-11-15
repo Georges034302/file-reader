@@ -1,3 +1,2 @@
 This is a test file
 reader will read and count the words in this file
-word count will be written to index.html
