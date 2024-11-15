@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Function to trim leading and trailing whitespace
+trim() {
+    echo "$1" | awk '{$1=$1};1'
+}
+
 # Check if the step.txt file argument is provided
 STEP_FILE=$1  # Get the step.txt file as the first argument
 
@@ -11,11 +16,12 @@ fi
 
 # Check if the provided step.txt file exists
 if [ -f "$STEP_FILE" ]; then
-    # Read the content of the step.txt file
+    # Read the content of the step.txt file and trim any leading/trailing whitespace
     STEP_CONTENT=$(cat "$STEP_FILE")
-    echo "Step content read successfully."
+    STEP_CONTENT=$(trim "$STEP_CONTENT")
+    echo "Step content read and trimmed."
 
-    # Check if the content from the step.txt file is already in README.md
+    # Check if the content from the step.txt file is already in README.md (after trimming)
     if grep -Fxq "$STEP_CONTENT" README.md; then
         echo "Content from $STEP_FILE already exists in README.md. Skipping append."
     else
