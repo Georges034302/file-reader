@@ -6,4 +6,8 @@ Reading text file content and display word count on HTML using Python script run
 Great! You uploaded index.html
 ### Next Step: Push Python Word Count Script
 Add a Python script named reader.py that reads file.txt and outputs the word count.
+          ## Step 1 Complete
+Great! You uploaded index.html
+### Next Step: Push Python Word Count Script
+Add a Python script named reader.py that reads file.txt and outputs the word count.
           
