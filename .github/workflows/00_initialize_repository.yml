@@ -21,8 +21,8 @@ jobs:
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
-          # Save valid Git configuration (exclude invalid ones like safe.directory)
-          git config --list | grep -v 'safe.directory' > .github/gitconfig.txt
+          # Save valid Git configuration (exclude git-lfs settings)
+          git config --list | grep -vE 'filter.lfs.clean|filter.lfs.smudge' > .github/gitconfig.txt
 
       - name: Commit Git configuration file
         run: |

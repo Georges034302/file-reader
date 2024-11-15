@@ -20,10 +20,13 @@ jobs:
 
       - name: Load Git configuration from file
         run: |
-          # Load the Git configuration file
+          # Load the Git configuration file, excluding invalid or unnecessary settings
           if [ -f .github/gitconfig.txt ]; then
             while IFS= read -r line; do
-              git config --global "$line"
+              # Apply configuration line only if it's valid
+              if [[ ! "$line" =~ "filter.lfs" ]]; then
+                git config --global "$line"
+              fi
             done < .github/gitconfig.txt
           fi
 
