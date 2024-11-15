@@ -12,11 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Update README for Next Step
+      - name: Run update_readme.sh script with 02_step.txt
         run: |
-          # Load content from the txt file and append to README.md
-          cat ./.github/workflows/steps/02_step.txt >> README.md
-          # Stage and commit the updated README.md file
-          git add README.md
-          git commit -m "Update README with Step 2 instructions"
-          git push origin main
+          # Run the update_readme.sh script with the path to the step txt file
+          bash .github/scripts/actions/update_readme.sh .github/workflows/steps/02_step.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
