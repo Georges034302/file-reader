@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Run the reader.py script to process file.txt and get the word count
-WORD_COUNT=$(python3 reader.py file.txt)
+WORD_COUNT=$(python3 reader.py)
 
 # Debugging: Print what the word count is returning
 echo "Word count returned: $WORD_COUNT"
@@ -27,6 +27,7 @@ sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count o
 echo "Updated index.html content:"
 cat index.html
 
+# Update README with the step completion information
 echo "## Step 4 Complete" >> README.md
 echo "Nice work! You uploaded Dockerfile." >> README.md
 echo "### Final Step: File Detector" >> README.md
