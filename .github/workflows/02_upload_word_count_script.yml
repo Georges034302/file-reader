@@ -3,12 +3,11 @@ name: Step 2 - Upload Python Word Count Script
 on:
   push:
     paths:
-      - "reader.py" # Trigger this workflow when reader.py is uploaded or updated
+      - "reader.py"  # Trigger only if reader.py is updated
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,8 +17,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: List files in the repository for debugging
+        run: ls -al
+
       - name: Run update_readme.sh script with 02_step.txt
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/02_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated README.md and push changes
+        run: |
+          git add README.md
+          git commit -m "Update README after adding reader.py"
+          git push origin main

@@ -19,7 +19,6 @@ jobs:
 
       - name: Set up Git configuration for commit
         run: |
-          # Set commit information directly for this step without global gitconfig
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
@@ -28,3 +27,9 @@ jobs:
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated README.md and push changes
+        run: |
+          git add README.md
+          git commit -m "Update README after adding index.html"
+          git push origin main
