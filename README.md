@@ -15,3 +15,7 @@ Create a Dockerfile that installs Python, reads file.txt, and updates index.html
 Nice work! You uploaded Dockerfile.
 ### Final Step: File Detector
 Deploy the application by configuring the desired deployment setup.
+## Step 4 Complete
+Nice work! You updated the word count in index.html
+### File Detector: Check for file updates
+File detector will detect file changes and read the word count
