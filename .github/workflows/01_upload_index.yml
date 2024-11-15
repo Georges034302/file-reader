@@ -16,9 +16,9 @@ jobs:
 
       - name: Set up Git user for commits
         run: |
-          # Set up Git config to use GitHub Actions actor for commit
-          git config --global user.name "${{ secrets.GITHUB_ACTOR }}"
-          git config --global user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+          # Make sure both user.name and user.email are correctly set up for GitHub Actions
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
 
       - name: Update README for Next Step
