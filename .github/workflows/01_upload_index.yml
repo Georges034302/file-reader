@@ -7,7 +7,7 @@ on:
       - completed
   push:
     paths:
-      - "index.html"  # Trigger this workflow when index.html is pushed to the repository
+      - "index.html"  # Trigger this workflow only when index.html is pushed to the repository for the first time
 
 jobs:
   update-readme:
@@ -32,4 +32,4 @@ jobs:
         run: |
           git add README.md
           git commit -m "Update README after adding index.html"
-          git push origin main
+          git push origin main || echo "No changes to commit"

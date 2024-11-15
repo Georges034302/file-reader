@@ -3,12 +3,11 @@ name: Step 3 - Upload Dockerfile
 on:
   push:
     paths:
-      - "Dockerfile"  # Trigger only if Dockerfile is updated
+      - "Dockerfile"
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -18,17 +17,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: List files in the repository for debugging
-        run: ls -al
-
       - name: Run update_readme.sh script with 03_step.txt
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/03_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Commit updated README.md and push changes
+      - name: Commit updated README.md and push changes if modified
         run: |
-          git add README.md
-          git commit -m "Update README after adding Dockerfile"
-          git push origin main
+          git diff --exit-code README.md || (git add README.md && git commit -m "Update README after adding Dockerfile" && git push origin main)
