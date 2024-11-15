@@ -35,7 +35,6 @@ jobs:
 
       - name: Commit changes if README.md has been updated
         run: |
-          # Check if there are any changes to commit
           if git diff --exit-code README.md; then
             echo "No changes to README.md. Skipping commit."
           else
