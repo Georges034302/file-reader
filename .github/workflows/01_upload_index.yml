@@ -1,0 +1,24 @@
+# .github/workflows/01_upload_index.yml
+name: Step 1 - Upload index.html
+
+on:
+  push:
+    paths:
+      - "index.html"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update README for Next Step
+        run: |
+          echo "## Step 1 Complete" >> README.md
+          echo "Great! You uploaded index.html." >> README.md
+          echo "### Next Step: Push Python Word Count Script" >> README.md
+          echo "Add a Python script named reader.py that reads file.txt and outputs the word count." >> README.md
+          git add README.md
+          git commit -m "Update README with Step 2 instructions"
+          git push origin main
