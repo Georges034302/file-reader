@@ -7,3 +7,9 @@ Great! You uploaded index.html
 ### Next Step: Push Python Word Count Script
 Add a Python script named reader.py that reads file.txt and outputs the word count.
           
+<!-- 02_step.txt -->
+## Step 2 Complete
+Well done! You added reader.py.
+### Next Step: Push Dockerfile
+Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count.
+          <!-- 02_step.txt -->
