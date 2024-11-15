@@ -29,7 +29,7 @@ cat index.html
 
 # Update README with the step completion information
 echo "## Step 4 Complete" >> README.md
-echo "Nice work! You uploaded Dockerfile." >> README.md
+echo "Nice work! You updated the word count in index.html." >> README.md
 echo "### Final Step: File Detector" >> README.md
 echo "Deploy the application by configuring the desired deployment setup." >> README.md
 
