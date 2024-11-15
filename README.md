@@ -11,3 +11,7 @@ Add a Python script named reader.py that reads file.txt and outputs the word cou
 Well done! You added reader.py.
 ### Next Step: Push Dockerfile
 Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count.
+## Step 3 Complete
+Nice work! You uploaded Dockerfile.
+### Final Step: Deploy
+Deploy the application by configuring the desired deployment setup.
