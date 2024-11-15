@@ -14,13 +14,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        
+
       - name: Set up Git configuration for commit
         run: |
           # Set commit information directly for this step without global gitconfig
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-        
+
       - name: Create and switch to a new branch
         run: |
           BRANCH=initialize-repository-branch
@@ -35,11 +35,12 @@ jobs:
         run: |
           git add README.md
           git commit -m "Initialize repository with basic setup"
-        
+
       - name: Push changes to the repository
         run: |
+          # Push the new branch and set the upstream branch
           git push --set-upstream origin $BRANCH
-        
+
       - name: Restore main branch
         run: |
           git checkout main
