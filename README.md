@@ -1,7 +1,8 @@
 # file-reader
-[<img src="https://github.com/user-attachments/assets/1f267829-94d2-4b9f-b500-1c9bf8303865" width="50" height="80">](https://georges034302.github.io/file-reader/)
+[<img src="https://github.com/user-attachments/assets/5edd93c3-b713-4964-99b4-d203b654c42d" width="50" height="80">](https://georges034302.github.io/file-reader/)
 
-## Reading text file content and display word count on HTML using Python script running on a Docker image
+Reading text file content and display word count on HTML using Python script running on a Docker image
+
 ## Step 1 Complete
 Great! You uploaded index.html.
 ### Next Step: Push Python Word Count Script
