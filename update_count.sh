@@ -3,6 +3,9 @@
 # Run the reader.py script to process file.txt and get the word count
 WORD_COUNT=$(python3 reader.py file.txt)
 
+# Debugging: Print what the word count is returning
+echo "Word count returned: $WORD_COUNT"
+
 # Ensure that the word count is a valid number (only digits)
 if [[ "$WORD_COUNT" =~ ^[0-9]+$ ]]; then
   echo "Current word count: $WORD_COUNT"
