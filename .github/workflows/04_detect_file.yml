@@ -1,0 +1,42 @@
+name: Step 4 - Detect file.txt Update and Re-run Script
+
+on:
+  push:
+    paths:
+      - "file.txt"  # Trigger when file.txt is updated
+
+jobs:
+  detect-and-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'  # Adjust the version to match your script's requirements
+
+      - name: Install dependencies
+        run: |
+          # Install any dependencies required by reader.py (if any)
+          pip install -r requirements.txt || echo "No requirements.txt file found"
+
+      - name: Re-run reader.py and update index.html
+        run: |
+          # Run the reader.py script to process file.txt and get the word count
+          python reader.py file.txt > word_count.txt
+
+          # Extract the word count from word_count.txt and update index.html
+          WORD_COUNT=$(cat word_count.txt)
+          echo "Updating index.html with new word count: $WORD_COUNT"
+          
+          # Replace the word count placeholder in index.html
+          sed -i "s/Word Count: [0-9]*/Word Count: $WORD_COUNT/" index.html
+          
+          # Stage and commit the updated index.html
+          git add index.html
+          git commit -m "Update index.html with new word count"
+          git push origin main
+          

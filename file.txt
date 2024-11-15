@@ -1,0 +1,2 @@
+This is a text file
+reader.py will read the file and count the words
