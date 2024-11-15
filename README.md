@@ -15,3 +15,7 @@ Create a Dockerfile that installs Python, reads file.txt, and updates index.html
 Nice work! You uploaded Dockerfile.
 ### Final Step: Deploy
 Deploy the application by configuring the desired deployment setup.
+## Step 2 Complete
+Well done! You added reader.py.
+### Next Step: Push Dockerfile
+Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count.
