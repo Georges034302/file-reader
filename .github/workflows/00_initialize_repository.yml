@@ -36,10 +36,10 @@ jobs:
           git add README.md
           git commit -m "Initialize repository with basic setup"
 
-      - name: Push changes to the repository
+      - name: Push changes to the repository and set upstream
         run: |
-          # Push the new branch and set the upstream branch
-          git push --set-upstream origin $BRANCH
+          # Push the new branch and set upstream properly
+          git push origin $BRANCH:$BRANCH  # Explicitly set the branch to track with the remote
 
       - name: Restore main branch
         run: |
