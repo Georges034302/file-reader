@@ -15,7 +15,7 @@ fi
 sed -i "s|<p>The word count of file.txt is: [0-9]* words</p>|<p>The word count of file.txt is: $WORD_COUNT words</p>|g" index.html
 
 # Load content from the txt file and append to README.md
-cat ./.github/workflows/steps/04_step.txt >> README.md
+cat ./steps/04_step.txt >> README.md
 # Stage and commit the updated README.md file
 git add README.md
 git commit -m "Update README with Step 4 instructions"

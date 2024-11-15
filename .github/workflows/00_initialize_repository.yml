@@ -1,33 +1,29 @@
+# .github/workflows/00_initialize_repository.yml
 name: Initialize Repository and Set up Git Configuration
 
 on:
   push:
     branches:
-      - main
+      - main  # Trigger this workflow only when a push to the main branch occurs
   pull_request:
     branches:
-      - main
+      - main  # Trigger this workflow for pull requests targeting main
 
 jobs:
   initialize-repository:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout repository to the workspace
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Git user for commits
       - name: Set up Git user for commits
         run: |
           git config --global user.name "${{ github.actor }}"
           git config --global user.email "${{ github.actor }}@users.noreply.github.com"
           git config --global --add safe.directory /github/workspace
 
-      # Step 3: Push changes to repository
       - name: Push changes to repository
         run: |
-          # Push the changes back to the repository using the GITHUB_TOKEN
           git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
