@@ -1,29 +1,39 @@
+# .github/workflows/01_upload_index.yml
 name: Step 1 - Upload index.html
 
 on:
   push:
     paths:
-      - "index.html"
+      - "index.html"  # Trigger this workflow only when index.html is pushed
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set up Git user for commits
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git config --global --add safe.directory /github/workspace  # Ensure safe directory is added
+          # Set up Git config to use GitHub Actions actor for commit
+          git config --global user.name "${{ secrets.GITHUB_ACTOR }}"
+          git config --global user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+          git config --global --add safe.directory /github/workspace
 
       - name: Update README for Next Step
         run: |
+          # Update README.md with instructions for the next step
           echo "## Step 1 Complete" >> README.md
           echo "Great! You uploaded index.html." >> README.md
           echo "### Next Step: Push Python Word Count Script" >> README.md
           echo "Add a Python script named reader.py that reads file.txt and outputs the word count." >> README.md
+          
+          # Commit the changes to README.md
           git add README.md
           git commit -m "Update README with Step 2 instructions"
-          git push origin main
+
+      - name: Push changes to repository
+        run: |
+          # Push the changes back to the repository using the GITHUB_TOKEN
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
