@@ -2,12 +2,12 @@ name: Step 1 - Upload index.html
 
 on:
   workflow_run:
-    workflows: ["Initialize Repository and Set up Git Configuration"]
+    workflows: ["Initialize Repository and Set up Git Configuration"]  # Only run if initialization completes
     types:
       - completed
   push:
     paths:
-      - "index.html"  # Trigger this workflow when index.html is pushed to the repository
+      - "index.html"  # Trigger only if `index.html` is pushed to the repository
 
 jobs:
   update-readme:
@@ -28,11 +28,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Check if README.md has changed
+      - name: Check if README.md has changes
         run: |
           git diff --exit-code README.md || echo "Changes detected in README.md"
 
-      - name: Commit changes to README.md only if there are modifications
+      - name: Commit changes if README.md is modified
         run: |
           if ! git diff --quiet README.md; then
             echo "Changes detected in README.md. Committing..."
