@@ -19,5 +19,5 @@ jobs:
 
       - name: Run the update word count script
         run: |
-          chmod +x ./update_word_count.sh
-          ./update_word_count.sh
+          chmod +x ./update_count.sh
+          ./update_count.sh
