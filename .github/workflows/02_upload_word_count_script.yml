@@ -1,1 +1,25 @@
+# .github/workflows/02_upload_word_count_script.yml
+name: Step 2 - Upload Python Word Count Script
+
+on:
+  push:
+    paths:
+      - "reader.py"
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Update README for Next Step
+        run: |
+          echo "## Step 2 Complete" >> README.md
+          echo "Well done! You added reader.py." >> README.md
+          echo "### Next Step: Push Dockerfile" >> README.md
+          echo "Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count." >> README.md
+          git add README.md
+          git commit -m "Update README with Step 3 instructions"
+          git push origin main
 
