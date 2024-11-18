@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch, mock_open
-import reader  # import reader.py that contains count_words_in_file
+import reader  # import reader.py and test the reader function
 
 # Test: test_word_count_valid_file
 def test_word_count_valid_file():
