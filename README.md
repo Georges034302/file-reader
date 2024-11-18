@@ -35,3 +35,10 @@ Nice work! You uploaded Dockerfile.
 - Add trigger on-push `file.txt`
 - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/04_step.txt`
 - Add new command to update index.html using `.github/workflows/actions/update_count.sh`
+## Step 4 Complete :white_check_mark:
+Nice work! You updated the word count in index.html
+### Next Step: Load Python Test Script
+- Update the workflow step 05 `05_upload_pytest.yml`
+- Add trigger on-push `readertest.py`
+- Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/05_step.txt`
+- Develop and add `readertest.py`
