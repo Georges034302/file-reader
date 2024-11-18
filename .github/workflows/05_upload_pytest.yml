@@ -1,4 +1,4 @@
-name: Run Unittests in Docker
+name: Run Python Test in Docker
 
 on:
   push:
@@ -15,6 +15,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2  # Checkout the repository
+      - name: Set up Git configuration for commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
       - name: Build Docker image
         run: |
@@ -23,3 +27,14 @@ jobs:
       - name: Run unit tests in Docker
         run: |
           docker run --rm readertest-image  # Run the Docker container and execute the unittest
+      - name: Run update_readme.sh script with 05_step.txt
+        run: |
+          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/05_step.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+      - name: Commit changes to README.md if updated
+        run: |
+          git add README.md
+          git commit -m "Update README.md with Step 05 instructions" || echo "No changes to commit"
+          git push origin main || echo "No changes to push"
