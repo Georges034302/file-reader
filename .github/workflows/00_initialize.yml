@@ -1,37 +1,41 @@
-name: Check for Initial Setup and Update README
+name: Check for 00_step.txt and Update README
 
 on:
-  workflow_dispatch:  # Manually trigger the initial step
-  push:
-    paths:
-      - ".github/workflows/steps/00_step.txt"  # Trigger for first-time setup
+  workflow_dispatch:  # Allow manual trigger
+  push:               # Trigger on push to the repository
+    branches:
+      - main          # Adjust branch as needed
 
 jobs:
-  check-repo-setup:
+  check-and-update-readme:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Validate Initial Setup
+      - name: Check if 00_step.txt Exists
+        id: check_step_file
         run: |
-          if [ ! -f index.html ]; then
-            echo "index.html is missing. Proceed to upload it as described in Step 00."
+          if [ -f ".github/workflows/steps/00_step.txt" ]; then
+            echo "00_step.txt exists."
+            echo "file_exists=true" >> $GITHUB_ENV
           else
-            echo "index.html already exists. Ensure workflows are properly updated."
+            echo "00_step.txt does not exist. Exiting workflow."
+            echo "file_exists=false" >> $GITHUB_ENV
+            exit 0
+          fi
 
-      - name: Set up Git configuration for commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-
-      - name: Run update_readme.sh script with 00_step.txt
+      - name: Run update_readme.sh Script
+        if: env.file_exists == 'true'
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/00_step.txt
 
-      - name: Commit changes to README.md
+      - name: Commit Changes to README.md
+        if: env.file_exists == 'true'
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git commit -m "Update README.md with Step 00 instructions" || echo "No changes to commit"
+          git commit -m "Update README.md based on 00_step.txt" || echo "No changes to commit"
           git push origin main || echo "No changes to push"
