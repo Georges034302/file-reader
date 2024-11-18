@@ -5,7 +5,6 @@ Reading text file content and display word count on HTML using Python script run
 The project is a GitHub workflow pipeline, where each step triggers the next. 
 Clone the repository to start initialization phase.
 
-<hr>
 ## Initial Step: Cloning Repository :white_check_mark:
 Great! You cloned the repository `file-reader`
 ### Next Step: Upload index.html
