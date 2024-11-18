@@ -3,23 +3,29 @@ name: Step 1 - Upload index.html
 on:
   push:
     paths:
-      - "index.html"  # Only trigger on reader.py changes
+      - "index.html"  # Trigger only on index.html changes
 
 jobs:
   update-readme:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v3
 
-      - name: Set up Git configuration for commit
+      - name: Set Up Git Configuration for Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run update_readme.sh script with 01_step.txt
+      - name: Run update_readme.sh Script
         run: |
           bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and Push Changes
+        run: |
+          git add README.md
+          git commit -m "Step 1: Updated README.md for index.html upload" || echo "No changes to commit"
+          git push origin main || echo "No changes to push"
