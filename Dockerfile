@@ -12,7 +12,7 @@ WORKDIR /app
 COPY index.html file.txt reader.py readertest.py ./
 
 # Install Python dependencies (you can add requirements.txt if needed)
-# RUN pip3 install -r requirements.txt  # Optional, if you have requirements file
+RUN pip3 install -r requirements.txt  # Optional, if you have requirements file
 
 # Install pytest
 RUN pip3 install pytest
