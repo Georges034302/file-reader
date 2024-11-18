@@ -19,3 +19,12 @@ Great! You uploaded index.html
 - Add trigger on-push `reader.py`
 - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/02_step.txt`
 - Develop and add the Python script `reader.py`
+## Step 2 Complete :white_check_mark:
+Well done! You added reader.py.
+### Next Step: Dockerfile
+Create a Dockerfile that installs Python, reads file.txt, and updates index.html with the word count.
+### Next Step: Dockerfile
+- Update the workflow step 03 `03_upload_dockerfile.yml`
+- Add trigger on-push `Dockerfile`
+- Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/03_step.txt`
+- Develop and add `Dockerfile`
