@@ -28,3 +28,10 @@ Create a Dockerfile that installs Python, reads file.txt, and updates index.html
 - Add trigger on-push `Dockerfile`
 - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/03_step.txt`
 - Develop and add `Dockerfile`
+## Step 3 Complete :white_check_mark:
+Nice work! You uploaded Dockerfile.
+### Next Step: File Detector
+- Update the workflow step 04 `04_detect_file.yml`
+- Add trigger on-push `file.txt`
+- Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/04_step.txt`
+- Add new command to update index.html using `.github/workflows/actions/update_count.sh`
