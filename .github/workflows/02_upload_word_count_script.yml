@@ -1,9 +1,9 @@
-name: Step 2 - Upload Dockerfile
+name: Step 2 - Upload reader.py
 
 on:
   push:
     paths:
-      - "Dockerfile"  # Trigger only if Dockerfile changes
+      - "reader.py"  # Trigger only if Dockerfile changes
 
 jobs:
   update-readme:

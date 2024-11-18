@@ -1,9 +1,9 @@
-name: Step 2 - Upload reader.py
+name: Step 1 - Upload index.html
 
 on:
   push:
     paths:
-      - "reader.py"  # Only trigger on reader.py changes
+      - "index.html"  # Only trigger on reader.py changes
 
 jobs:
   update-readme:
@@ -18,8 +18,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run update_readme.sh script with 02_step.txt
+      - name: Run update_readme.sh script with 01_step.txt
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/02_step.txt
+          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

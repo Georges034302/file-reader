@@ -1,0 +1,25 @@
+name: Run Unittests in Docker
+
+on:
+  push:
+    paths:
+      - "readertest.py"  # Trigger when readertest.py is updated
+  pull_request:
+    paths:
+      - "readertest.py"  # Trigger for pull requests
+
+jobs:
+  run-unittests:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for GitHub Actions
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Checkout the repository
+
+      - name: Build Docker image
+        run: |
+          docker build -t readertest-image .  # Build the Docker image using the Dockerfile
+
+      - name: Run unit tests in Docker
+        run: |
+          docker run --rm readertest-image  # Run the Docker container and execute the unittest

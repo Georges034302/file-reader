@@ -1,0 +1,18 @@
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore virtual environment directories
+.venv/
+env/
+venv/
+
+# Ignore pytest cache directory
+pytest_cache/
+.pytest_cache
+
+# Ignore Docker related files (if you don’t want Dockerfiles or images to be tracked)
+*.dockerfile
+*.img

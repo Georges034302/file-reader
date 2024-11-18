@@ -1,0 +1,37 @@
+name: Check for Initial Setup and Update README
+
+on:
+  workflow_dispatch:  # Manually trigger the initial step
+  push:
+    paths:
+      - ".github/workflows/steps/00_step.txt"  # Trigger for first-time setup
+
+jobs:
+  check-repo-setup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Validate Initial Setup
+        run: |
+          if [ ! -f index.html ]; then
+            echo "index.html is missing. Proceed to upload it as described in Step 00."
+          else
+            echo "index.html already exists. Ensure workflows are properly updated."
+
+      - name: Set up Git configuration for commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Run update_readme.sh script with 00_step.txt
+        run: |
+          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/00_step.txt
+
+      - name: Commit changes to README.md
+        run: |
+          git add README.md
+          git commit -m "Update README.md with Step 00 instructions" || echo "No changes to commit"
+          git push origin main || echo "No changes to push"
