@@ -12,3 +12,10 @@ Great! You cloned the repository `file-reader`
 - Add trigger on-push `index.html`
 - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/01_step.txt`
 - Upload `index.html`
+## Step 1 Complete :white_check_mark:
+Great! You uploaded index.html
+### Next Step: Python Word Count Script
+- Update the workflow step 02 `02_upload_word_count_script.yml`
+- Add trigger on-push `reader.py`
+- Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/02_step.txt`
+- Develop and add the Python script `reader.py`
