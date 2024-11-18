@@ -42,3 +42,8 @@ Nice work! You updated the word count in index.html
 - Add trigger on-push `readertest.py`
 - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/05_step.txt`
 - Develop and add `readertest.py`
+## Step 5 Complete :white_check_mark:
+Nice work! You uploaded Python unit test
+### This Step: Load Python Test Script
+- GitHub Actions pipeline detects `readertest.py`
+- GitHub Actions runs `readertest.py` when Docker container runs
