@@ -6,4 +6,4 @@ python3 reader.py
 
 # Run pytest with verbose output and short traceback
 echo "Running tests with pytest..."
-pytest -v --tb=short readertest.py
+/venv/bin/pytest -v --tb=short readertest.py

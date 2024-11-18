@@ -16,7 +16,7 @@ COPY requirements.txt /app/requirements.txt
 RUN python3 -m venv /venv && \
     /venv/bin/pip install --no-cache-dir -r /app/requirements.txt
 
-# Install pytest separately in the virtual environment
+# Ensure pytest is installed globally in the system
 RUN /venv/bin/pip install pytest
 
 # Copy all necessary files (Python scripts, HTML, etc.) into the container
