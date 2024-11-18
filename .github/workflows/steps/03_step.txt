@@ -1,4 +1,7 @@
-## Step 3 Complete
+## Step 3 Complete :white_check_mark:
 Nice work! You uploaded Dockerfile.
-### Final Step: File Detector
-Deploy the application by configuring the desired deployment setup.
+### Next Step: File Detector
+- Update the workflow step 04 `04_detect_file.yml`
+  - Add trigger on-push `file.txt`
+  - Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/04_step.txt`
+  - Add new command to update index.html using `.github/workflows/actions/update_count.sh`
