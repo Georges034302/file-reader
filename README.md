@@ -6,3 +6,10 @@ The project is a GitHub workflow pipeline, where each step triggers the next.
 Clone the repository to start initialization phase.
 
 <hr>
+## Initial Step: Cloning Repository :white_check_mark:
+Great! You cloned the repository `file-reader`
+### Next Step: Upload index.html
+- Update the workflow step 01 `01_upload_index.yml`
+- Add trigger on-push `index.html`
+- Add new command to update README using `.github/workflows/actions/update_readme.sh` with `.github/workflows/steps/01_step.txt`
+- Upload `index.html`
