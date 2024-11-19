@@ -16,8 +16,10 @@ jobs:
 
       - name: Source Common Git Operations Script
         run: |
+          ls -l .github/workflows/actions/
           chmod +x .github/workflows/actions/git_operations.sh
-          source .github/workflows/actions/git_operations.sh      
+          source .github/workflows/actions/git_operations.sh     
+          echo "Functions sourced successfully!" 
 
       - name: Check if 00_step.txt Exists
         id: check_step_file
