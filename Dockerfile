@@ -1,7 +1,7 @@
 # Use the latest Ubuntu image as base
 FROM ubuntu:latest
 
-# Install Python, pip, and the python3-venv package for creating virtual environments
+# Install Python, pip, and the python3-venv to create virtual environments
 RUN apt-get update && \
     apt-get install -y python3 python3-pip python3-venv && \
     apt-get clean
