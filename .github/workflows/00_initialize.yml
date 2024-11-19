@@ -18,8 +18,11 @@ jobs:
         run: |
           ls -l .github/workflows/actions/
           chmod +x .github/workflows/actions/git_operations.sh
-          source .github/workflows/actions/git_operations.sh     
-          echo "Functions sourced successfully!" 
+          source .github/workflows/actions/git_operations.sh
+          echo "Functions sourced successfully!"
+          declare -f setup_git
+          declare -f update_readme
+          declare -f commit_and_push_readme  
 
       - name: Check if 00_step.txt Exists
         id: check_step_file
