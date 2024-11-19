@@ -12,13 +12,14 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Source Common Git Operations Script and Run
+      - name: Source Common Git Operations Script and Run All Git Operations
         run: |
           chmod +x .github/workflows/actions/git_operations.sh
           source .github/workflows/actions/git_operations.sh
           setup_git
-          update_readme .github/workflows/steps/04_step.txt
-          commit_and_push_readme
+          commit_unstaged_changes
+          pull_latest_changes
+          commit_and_push_index_html
 
       - name: Set up Python for word count script
         uses: actions/setup-python@v2
@@ -30,15 +31,10 @@ jobs:
           chmod +x ./.github/workflows/actions/update_count.sh
           ./.github/workflows/actions/update_count.sh
 
-      - name: Commit any unstaged changes (if any) before pulling from remote
+      - name: Update README.md and Commit Changes
         run: |
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
           setup_git
-          commit_unstaged_changes
-
-      - name: Pull the latest changes from remote main branch before pushing
-        run: |
-          pull_latest_changes
-
-      - name: Commit changes to index.html if word count was added
-        run: |
-          commit_and_push_index_html
+          update_readme .github/workflows/steps/04_step.txt
+          commit_and_push_readme
