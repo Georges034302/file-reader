@@ -3,7 +3,7 @@ name: Step 1 - Upload index.html
 on:
   push:
     paths:
-      - "index.html"  # Trigger only on index.html changes
+      - "index.html"
 
 jobs:
   update-readme:
@@ -13,19 +13,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set Up Git Configuration for Commit
+      - name: Source Common Git Operations Script
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
 
-      - name: Run update_readme.sh Script
+      - name: Update README.md and Commit Changes
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/01_step.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit and Push Changes
-        run: |
-          git add README.md
-          git commit -m "Step 1: Updated README.md for index.html upload" || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          setup_git
+          update_readme .github/workflows/steps/01_step.txt
+          commit_and_push_readme

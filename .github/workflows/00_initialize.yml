@@ -14,6 +14,11 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Source Common Git Operations Script
+        run: |
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
+
       - name: Check if 00_step.txt Exists
         id: check_step_file
         run: |
@@ -26,16 +31,9 @@ jobs:
             exit 0
           fi
 
-      - name: Run update_readme.sh Script
+      - name: Update README.md and Commit Changes
         if: env.file_exists == 'true'
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/00_step.txt
-
-      - name: Commit Changes to README.md
-        if: env.file_exists == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add README.md
-          git commit -m "Update README.md based on 00_step.txt" || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          setup_git
+          update_readme .github/workflows/steps/00_step.txt
+          commit_and_push_readme

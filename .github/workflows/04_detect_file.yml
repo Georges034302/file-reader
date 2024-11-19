@@ -9,8 +9,13 @@ jobs:
   update-word-count:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - name: Source Common Git Operations Script
+        run: |
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
 
       - name: Set up Python for word count script
         uses: actions/setup-python@v2
@@ -22,35 +27,21 @@ jobs:
           chmod +x ./.github/workflows/actions/update_count.sh
           ./.github/workflows/actions/update_count.sh
 
-      - name: Check if word count was updated in index.html
-        run: |
-          cat index.html  # Print the contents of index.html for debugging
-
       - name: Commit any unstaged changes (if any) before pulling from remote
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "Temporary commit before pulling changes" || echo "No changes to commit"
+          setup_git
+          commit_unstaged_changes
 
       - name: Pull the latest changes from remote main branch before pushing
         run: |
-          git pull origin main --rebase
+          pull_latest_changes
 
       - name: Commit changes to index.html if word count was added
         run: |
-          git add index.html
-          git commit -m "Append word count to index.html" || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          commit_and_push_index_html
 
-      - name: Run update_readme.sh script with 04_step.txt
+      - name: Update README.md with new step
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/04_step.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit changes to README.md if updated
-        run: |
-          git add README.md
-          git commit -m "Update README.md with new step" || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          setup_git
+          update_readme .github/workflows/steps/04_step.txt
+          commit_and_push_readme

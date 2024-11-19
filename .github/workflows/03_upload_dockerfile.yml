@@ -10,31 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Git configuration for commit
+      - name: Source Common Git Operations Script
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
 
-      - name: Run update_readme.sh script with 03_step.txt
+      - name: Update README.md and Commit Changes
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/03_step.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Check if README.md was updated
-        run: |
-          # Check if README.md was modified
-          git diff --exit-code README.md || echo "README.md has changes"
-  
-      - name: Commit updated README.md and push changes
-        run: |
-          if git diff --quiet README.md; then
-            echo "No changes in README.md. Skipping commit."
-          else
-            git add README.md
-            git commit -m "Update README after adding Dockerfile"
-            git push origin main
-          fi
-  
+          setup_git
+          update_readme .github/workflows/steps/03_step.txt
+          commit_and_push_readme

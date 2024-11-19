@@ -1,4 +1,4 @@
-name: Run Python Test in Docker
+name: Step 5 - Run Python Test in Docker
 
 on:
   push:
@@ -10,31 +10,27 @@ on:
 
 jobs:
   run-unittests:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for GitHub Actions
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v2  # Checkout the repository
-      - name: Set up Git configuration for commit
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Build Docker image
+      - name: Source Common Git Operations Script
+        run: |
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
+
+      - name: Build Docker Image
         run: |
           docker build -t readertest-image .  # Build the Docker image using the Dockerfile
 
-      - name: Run unit tests in Docker
+      - name: Run Unit Tests in Docker
         run: |
           docker run --rm readertest-image  # Run the Docker container and execute the unittest
-      - name: Run update_readme.sh script with 05_step.txt
+
+      - name: Update README.md and Commit Changes
         run: |
-          bash .github/workflows/actions/update_readme.sh .github/workflows/steps/05_step.txt
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
-      - name: Commit changes to README.md if updated
-        run: |
-          git add README.md
-          git commit -m "Update README.md with Step 05 instructions" || echo "No changes to commit"
-          git push origin main || echo "No changes to push"
+          setup_git
+          update_readme .github/workflows/steps/05_step.txt
+          commit_and_push_readme
