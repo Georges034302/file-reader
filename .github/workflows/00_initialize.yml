@@ -14,11 +14,6 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Source Common Git Operations Script
-        run: |
-          chmod +x .github/workflows/actions/git_operations.sh
-          source .github/workflows/actions/git_operations.sh     
-
       - name: Check if 00_step.txt Exists
         id: check_step_file
         run: |
@@ -31,9 +26,11 @@ jobs:
             exit 0
           fi
 
-      - name: Update README.md and Commit Changes
-        if: env.file_exists == 'true'
+      - name: Source Common Git Operations Script and Run
         run: |
+          chmod +x .github/workflows/actions/git_operations.sh
+          source .github/workflows/actions/git_operations.sh
           setup_git
           update_readme .github/workflows/steps/00_step.txt
           commit_and_push_readme
+        if: env.file_exists == 'true'
