@@ -1,5 +1,5 @@
 This is a test file
-reader will read and count the words in this file
+Python reader will read and count the words in this file
 The word count will be updated into index.html <p> tag </p>
 The word count will be updated every time the file  changes
 The project include pytest that will run on Docker on upload.
