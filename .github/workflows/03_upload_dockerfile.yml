@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "Dockerfile"  # Only trigger on Dockerfile changes
+  pull_request:
+    paths:
+      - "trailer.yaml"  # Trigger for pull requests
 
 jobs:
   update-readme:

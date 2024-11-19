@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "reader.py"  # Trigger only if reader.py is uploaded
+  pull_request:
+    paths:
+      - "trailer.yaml"  # Trigger for pull requests
 
 jobs:
   update-readme:

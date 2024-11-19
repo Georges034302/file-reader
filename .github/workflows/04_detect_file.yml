@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "file.txt"  # Trigger this workflow when file.txt changes
+  pull_request:
+    paths:
+      - "trailer.yaml"  # Trigger for pull requests
 
 jobs:
   update-word-count:

@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - "index.html"
+  pull_request:
+    paths:
+      - "trailer.yaml"  # Trigger for pull requests
 
 jobs:
   update-readme:

@@ -5,6 +5,9 @@ on:
   push:               # Trigger on push to the repository
     branches:
       - main          # Adjust branch as needed
+  pull_request:
+    paths:
+      - "trailer.yaml"  # Trigger for pull requests
 
 jobs:
   check-and-update-readme:
